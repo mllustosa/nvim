@@ -30,8 +30,9 @@ return {
 
       mason.setup()
       masonLspconfig.setup({
-        ensure_installed = { "lua_ls", "eslint", "tsserver", "astro", "tailwindcss", "yamlls" }
+        ensure_installed = { "lua_ls", "eslint", "tsserver", "astro", "tailwindcss", "yamlls", "cssls" }
       })
+
 
       local function rename_file()
         local source_file, target_file
@@ -79,6 +80,24 @@ return {
           },
         },
       })
+
+      lspConfig.cssls.setup({settings = {
+        css = { validate = true,
+          lint = {
+            unknownAtRules = "ignore"
+          }
+        },
+        scss = { validate = true,
+          lint = {
+            unknownAtRules = "ignore"
+          }
+        },
+        less = { validate = true,
+          lint = {
+            unknownAtRules = "ignore"
+          }
+        },
+      }})
 
       lspConfig.eslint.setup({
         on_attach = function(_, bufnr)
