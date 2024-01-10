@@ -30,7 +30,17 @@ return {
 
       mason.setup()
       masonLspconfig.setup({
-        ensure_installed = { "lua_ls", "eslint", "tsserver", "astro", "tailwindcss", "yamlls", "cssls" }
+        ensure_installed = {
+          "astro",
+          "cssls",
+          "eslint",
+          "jsonls",
+          "lua_ls",
+          "marksman",
+          "tailwindcss",
+          "tsserver",
+          "yamlls"
+        }
       })
 
 
@@ -80,6 +90,10 @@ return {
           },
         },
       })
+
+      lspConfig.jsonls.setup({})
+
+      lspConfig.marksman.setup({})
 
       lspConfig.cssls.setup({settings = {
         css = { validate = true,
