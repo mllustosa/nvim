@@ -42,6 +42,9 @@ return {
       },
       filters = {
         dotfiles = true,
+        custom = {
+          ".*.d.ts"
+        }
       },
     })
   end

@@ -1,8 +1,22 @@
 return {
   "github/copilot.vim",
   config = function()
-    -- Dismiss Copilot suggestions with <C-c>
-    -- By default the suggestions are dismissed with <Esc>
-    vim.keymap.set("i", "<C-c>", "<Plug>(copilot-dismiss)<C-c>", { noremap = true })
+    -- Disable by default
+    vim.g.copilot_filetypes = {["*"] = false}
+
+    -- Tab already used in cmp setup above
+    vim.g.copilot_no_tab_map = true
+
+    -- Request suggestions manually
+    vim.keymap.set('i', '<C-Space>', 'copilot#Suggest()', {
+      expr = true,
+      replace_keycodes = false,
+    })
+
+    -- Accept current suggestion
+    vim.keymap.set('i', '<C-Enter>', 'copilot#Accept("")', {
+      expr = true,
+      replace_keycodes = false
+    })
   end
 }

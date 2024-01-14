@@ -43,7 +43,6 @@ return {
         }
       })
 
-
       local function rename_file()
         local source_file, target_file
 
@@ -95,23 +94,27 @@ return {
 
       lspConfig.marksman.setup({})
 
-      lspConfig.cssls.setup({settings = {
-        css = { validate = true,
-          lint = {
-            unknownAtRules = "ignore"
-          }
-        },
-        scss = { validate = true,
-          lint = {
-            unknownAtRules = "ignore"
-          }
-        },
-        less = { validate = true,
-          lint = {
-            unknownAtRules = "ignore"
-          }
-        },
-      }})
+      lspConfig.cssls.setup({
+        settings = {
+          css = {
+            validate = true,
+            lint = {
+              unknownAtRules = "ignore"
+            }
+          },
+          scss = {
+            validate = true,
+            lint = {
+              unknownAtRules = "ignore"
+            }
+          },
+          less = {
+            validate = true,
+            lint = {
+              unknownAtRules = "ignore"
+            }
+          },
+        }})
 
       lspConfig.eslint.setup({
         on_attach = function(_, bufnr)

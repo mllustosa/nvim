@@ -13,8 +13,12 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- Past without yanking the selection
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
--- Delete without yanking
-vim.keymap.set("n", "<Del>", "\"_x")
+-- Delete without yanking 
+vim.keymap.set("n", "x", "\"_x")
+vim.keymap.set("n", "X", "\"_X")
+vim.keymap.set("n", "d", "\"_d")
+vim.keymap.set("v", "d", "\"_d")
+vim.keymap.set("n", "D", "\"_D")
 
 -- Keep cursor centered when page up and down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -23,6 +27,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+-- Select all
+vim.keymap.set("n", "<leader>sa", "ggVG")
+
+-- Rezise nvim-tree
+vim.keymap.set("n", "<leader>te", ":NvimTreeResize +20<CR>")
+vim.keymap.set("n", "<leader>tc", ":NvimTreeResize -20<CR>")
 
 -- Refresh syntax highlighting
 vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>")
