@@ -35,6 +35,9 @@ vim.keymap.set("n", "<leader>sa", "ggVG")
 vim.keymap.set("n", "<leader>te", ":NvimTreeResize +20<CR>")
 vim.keymap.set("n", "<leader>tc", ":NvimTreeResize -20<CR>")
 
+-- Keep selected text when yanking
+vim.keymap.set("v", "y", "ygv")
+
 -- Refresh syntax highlighting
 vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>")
 

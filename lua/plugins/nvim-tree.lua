@@ -43,7 +43,7 @@ return {
       filters = {
         dotfiles = true,
         custom = {
-          ".*.d.ts"
+          "\\v.*\\.d\\.ts$"
         }
       },
     })
