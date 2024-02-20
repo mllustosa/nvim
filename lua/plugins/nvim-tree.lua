@@ -34,16 +34,16 @@ return {
       },
       view = {
         width = 30,
-        -- relativenumber = true,
+        relativenumber = true,
       },
       on_attach = on_attach,
       renderer = {
-        group_empty = true,
+        group_empty = false,
       },
       filters = {
         dotfiles = true,
         custom = {
-          "\\v.*\\.d\\.ts$"
+        --  "\\v.*\\.d\\.ts$"
         }
       },
     })

@@ -94,6 +94,8 @@ return {
 
       lspConfig.marksman.setup({})
 
+      lspConfig.astro.setup({})
+
       lspConfig.cssls.setup({
         settings = {
           css = {
