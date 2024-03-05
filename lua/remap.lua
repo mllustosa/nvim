@@ -20,6 +20,9 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 -- vim.keymap.set("v", "d", "\"_d")
 -- vim.keymap.set("n", "D", "\"_D")
 
+-- Keep selected text when yanking
+-- vim.keymap.set("v", "y", "ygv")
+
 -- Keep cursor centered when page up and down
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -31,10 +34,6 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 -- Rezise nvim-tree
 vim.keymap.set("n", "<leader>te", ":NvimTreeResize +20<CR>")
 vim.keymap.set("n", "<leader>tc", ":NvimTreeResize -20<CR>")
-
--- Keep selected text when yanking
--- vim.keymap.set("v", "y", "ygv")
-
 -- Refresh syntax highlighting
 vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>")
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")

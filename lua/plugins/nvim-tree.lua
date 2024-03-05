@@ -33,7 +33,7 @@ return {
         show_on_dirs = true,
       },
       view = {
-        width = 40,
+        width = 50,
         side = "right",
       },
       on_attach = on_attach,
