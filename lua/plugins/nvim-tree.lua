@@ -33,12 +33,17 @@ return {
         show_on_dirs = true,
       },
       view = {
-        width = 30,
-        relativenumber = true,
+        width = 40,
+        side = "right",
       },
       on_attach = on_attach,
       renderer = {
         group_empty = false,
+      },
+      actions = {
+        open_file = {
+          quit_on_open = true,
+        },
       },
       filters = {
         dotfiles = true,
