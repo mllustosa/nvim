@@ -14,7 +14,11 @@ return {
 
 			-- Default mappings
 			api.config.mappings.default_on_attach(bufnr)
-			vim.keymap.set("n", "<leader>e", api.tree.toggle)
+			vim.keymap.set("n", "<leader>e", api.tree.toggle, { desc = "Toggle [e]xplorer" })
+
+			-- Rezise nvim-tree
+			vim.keymap.set("n", "<leader>th", ":NvimTreeResize +20<CR>", { desc = "Increase size" })
+			vim.keymap.set("n", "<leader>tl", ":NvimTreeResize -20<CR>", { desc = "Decrease size" })
 		end
 
 		-- Setup with some options

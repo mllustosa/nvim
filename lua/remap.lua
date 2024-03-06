@@ -20,19 +20,14 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Yank but don't copy the selection
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
-
--- Rezise nvim-tree
-vim.keymap.set("n", "<leader>te", ":NvimTreeResize +20<CR>")
-vim.keymap.set("n", "<leader>tc", ":NvimTreeResize -20<CR>")
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank but don't copy the selection" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank but don't copy the selection" })
 
 -- Refresh syntax highlighting
-vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>")
-vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")
+vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>", { desc = "Refresh syntax highlighting" })
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- Restart LSP
+vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })
 
 vim.keymap.set("n", "<leader>pa", "99@a<CR>")
 vim.keymap.set("n", "<leader>ptw", 'ysa"}<CR>')
@@ -46,3 +41,6 @@ vim.keymap.set("n", "<leader>ptw", 'ysa"}<CR>')
 
 -- Keep selected text when yanking
 -- vim.keymap.set("v", "y", "ygv")
+
+-- Find and replace
+-- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
