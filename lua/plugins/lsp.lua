@@ -12,6 +12,9 @@ return {
 				ensure_installed = { "lua_ls", "tsserver", "eslint", "astro" },
 			})
 		end,
+		opts = {
+			auto_install = true,
+		},
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -22,6 +25,14 @@ return {
 
 			lspconfig.lua_ls.setup({
 				capabilities = capabilties,
+
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+					},
+				},
 			})
 
 			lspconfig.eslint.setup({
