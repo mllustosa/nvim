@@ -5,7 +5,7 @@ return {
 		-- vim.g.copilot_filetypes = {["*"] = false}
 
 		-- Tab already used in cmp setup above
-		vim.g.copilot_no_tab_map = true
+		-- vim.g.copilot_no_tab_map = true
 
 		-- Request suggestions manually
 		-- vim.keymap.set('i', '<C-Space>', 'copilot#Suggest()', {

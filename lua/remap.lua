@@ -29,8 +29,11 @@ vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>", {
 -- Restart LSP
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })
 
-vim.keymap.set("n", "<leader>pa", "99@a<CR>")
-vim.keymap.set("n", "<leader>ptw", 'ysa"}<CR>')
+-- Unbind the command-line window history
+vim.keymap.set("n", "q:", "<Nop>", { noremap = true, silent = true })
+
+-- Kill all buffers except the current one
+vim.keymap.set("n", "<leader>q", ":%bd|e#|bd#<CR>", { desc = "Kill all buffers except the current one" })
 
 -- Delete without yanking
 -- vim.keymap.set("n", "x", "\"_x")

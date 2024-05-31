@@ -1,5 +1,6 @@
 -- Show line numbers
 vim.opt.number = true
+-- vim.opt.cmdheight = 0
 
 -- Show relative line numbers
 vim.opt.relativenumber = true
@@ -41,6 +42,10 @@ vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Always show the sign column, otherwise it would shift the text each time it appears
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
 
 -- Add colored column indicating when line should break
 vim.opt.colorcolumn = "100"
