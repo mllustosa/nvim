@@ -46,41 +46,7 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			local function rename_file()
-				local source_file, target_file
-
-				vim.ui.input({
-					prompt = "Source : ",
-					completion = "file",
-					default = vim.api.nvim_buf_get_name(0),
-				}, function(input)
-					source_file = input
-				end)
-				vim.ui.input({
-					prompt = "Target : ",
-					completion = "file",
-					default = source_file,
-				}, function(input)
-					target_file = input
-				end)
-
-				local params = {
-					command = "_typescript.applyRenameFile",
-					arguments = {
-						{
-							sourceUri = source_file,
-							targetUri = target_file,
-						},
-					},
-					title = "",
-				}
-
-				vim.lsp.util.rename(source_file, target_file)
-				vim.lsp.buf.execute_command(params)
-			end
-
 			local servers = {
-				astro = {},
 				cssls = {
 					settings = {
 						css = {
@@ -91,8 +57,6 @@ return {
 						},
 					},
 				},
-				eslint = {},
-				jsonls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -114,15 +78,7 @@ return {
 						},
 					},
 				},
-				tailwindcss = {},
-				tsserver = {
-					commands = {
-						RenameFile = {
-							rename_file,
-							description = "Rename File",
-						},
-					},
-				},
+				ts_ls = {},
 			}
 
 			require("mason").setup()
@@ -130,8 +86,12 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 
 			vim.list_extend(ensure_installed, {
+				"astro",
+				"eslint",
+				"jsonls",
 				"stylua",
 				"prettierd",
+				"tailwindcss",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -157,13 +117,14 @@ return {
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				astro = { "prettierd" },
+				astro = { "prettier" },
 				javascriptreact = { "prettierd" },
 				json = { "prettierd" },
 				lua = { "stylua" },
-				typescript = { "prettierd" },
-				typescriptreact = { { "prettierd" } },
-				javascript = { "prettierd" },
+				typescript = { "prettier" },
+				html = { "prettierd" },
+				typescriptreact = { { "prettier" } },
+				javascript = { "prettier" },
 			},
 		},
 	},
@@ -212,6 +173,7 @@ return {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
+				preselect = "item",
 				completion = { completeopt = "menu,menuone,noinsert" },
 
 				-- For an understanding of why these mappings were
@@ -239,6 +201,11 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = {
+					{
+						name = "lazydev",
+						-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+						group_index = 0,
+					},
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },

@@ -1,3 +1,6 @@
+-- Set encoding to UTF-8
+vim.opt.encoding = "utf-8"
+
 -- Show line numbers
 vim.opt.number = true
 -- vim.opt.cmdheight = 0
@@ -35,7 +38,7 @@ vim.opt.backup = false
 vim.opt.undofile = true
 vim.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode
+-- Set highlight on search, but clear on pressing <C-c> in normal mode
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.keymap.set("n", "<C-c>", "<cmd>nohlsearch<CR>")
@@ -61,3 +64,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Exclude node_modules and other patterns using wildignore
+vim.opt.wildignore:append({ "**/node_modules/**", "**/.git/**", "**/dist/**" })

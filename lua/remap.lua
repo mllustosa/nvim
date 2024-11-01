@@ -12,7 +12,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- `Ctrl + c` to escape insert mode. Useful on visual block mode.
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
--- Past without yanking the selection
+-- Paste without yanking the selection
 vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- Keep cursor centered when page up and down
@@ -32,8 +32,14 @@ vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })
 -- Unbind the command-line window history
 vim.keymap.set("n", "q:", "<Nop>", { noremap = true, silent = true })
 
+-- Kill current buffer
+vim.keymap.set("n", "<leader>q", ":bd<CR>", { desc = "Kill the current buffer" })
+
 -- Kill all buffers except the current one
-vim.keymap.set("n", "<leader>q", ":%bd|e#|bd#<CR>", { desc = "Kill all buffers except the current one" })
+vim.keymap.set("n", "<leader>Q", ":%bd|e#|bd#<CR>", { desc = "Kill all buffers except the current one" })
+
+-- Find and replace
+-- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Delete without yanking
 -- vim.keymap.set("n", "x", "\"_x")
@@ -44,6 +50,3 @@ vim.keymap.set("n", "<leader>q", ":%bd|e#|bd#<CR>", { desc = "Kill all buffers e
 
 -- Keep selected text when yanking
 -- vim.keymap.set("v", "y", "ygv")
-
--- Find and replace
--- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
