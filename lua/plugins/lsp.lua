@@ -96,6 +96,8 @@ return {
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
+				ensure_installed = {},
+				automatic_installation = true,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
@@ -117,14 +119,14 @@ return {
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				astro = { "prettier" },
+				astro = { "prettierd" },
 				javascriptreact = { "prettierd" },
 				json = { "prettierd" },
 				lua = { "stylua" },
-				typescript = { "prettier" },
+				typescript = { "prettierd" },
 				html = { "prettierd" },
-				typescriptreact = { { "prettier" } },
-				javascript = { "prettier" },
+				typescriptreact = { "prettierd" },
+				javascript = { "prettierd" },
 			},
 		},
 	},

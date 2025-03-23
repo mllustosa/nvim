@@ -38,6 +38,9 @@ vim.keymap.set("n", "<leader>q", ":bd<CR>", { desc = "Kill the current buffer" }
 -- Kill all buffers except the current one
 vim.keymap.set("n", "<leader>Q", ":%bd|e#|bd#<CR>", { desc = "Kill all buffers except the current one" })
 
+-- Toggle git blame
+vim.keymap.set("n", "<leader>gb", ":Gitsigns blame_line<CR>", {})
+
 -- Find and replace
 -- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
