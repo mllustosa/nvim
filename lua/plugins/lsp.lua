@@ -127,6 +127,7 @@ return {
 				html = { "prettierd" },
 				typescriptreact = { "prettierd" },
 				javascript = { "prettierd" },
+				yaml = { "prettierd" },
 			},
 		},
 	},
