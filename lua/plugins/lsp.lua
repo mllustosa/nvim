@@ -79,6 +79,13 @@ return {
 					},
 				},
 				ts_ls = {},
+				tailwindcss = {
+					settings = {
+						tailwindCSS = {
+							classFunctions = { "cva", "cx" },
+						},
+					},
+				},
 			}
 
 			require("mason").setup()
@@ -91,6 +98,7 @@ return {
 				"jsonls",
 				"stylua",
 				"prettierd",
+				"prettier",
 				"tailwindcss",
 			})
 
