@@ -24,7 +24,11 @@ vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank but don't copy the select
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank but don't copy the selection" })
 
 -- Refresh syntax highlighting
-vim.keymap.set("n", "<leader>tr", ":write | edit | TSBufEnable highlight<CR>", { desc = "Refresh syntax highlighting" })
+vim.keymap.set("n", "<leader>tr", function()
+	vim.cmd("write | edit")
+	vim.treesitter.stop()
+	vim.treesitter.start()
+end, { desc = "Refresh syntax highlighting" })
 
 -- Restart LSP
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })

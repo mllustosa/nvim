@@ -8,10 +8,29 @@ return {
 		},
 		config = function()
 			local builtin = require("telescope.builtin")
+			local function use_project_python(client)
+				local root_dir = client.config.root_dir
+				local python_path = root_dir and (root_dir .. "/.venv/bin/python")
+
+				if python_path and vim.fn.executable(python_path) == 1 then
+					client.settings = client.settings or client.config.settings or {}
+					client.settings.python = vim.tbl_deep_extend(
+						"force",
+						client.settings.python or {},
+						{ pythonPath = python_path }
+					)
+					client:notify("workspace/didChangeConfiguration", { settings = nil })
+				end
+			end
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
+					local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+					if client.name == "pyright" then
+						use_project_python(client)
+					end
+
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
@@ -45,6 +64,8 @@ return {
 			-- So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			local python_capabilities = vim.deepcopy(capabilities)
+			python_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 			local servers = {
 				cssls = {
@@ -77,6 +98,12 @@ return {
 							},
 						},
 					},
+				},
+				pyright = {
+					capabilities = python_capabilities,
+				},
+				ruff = {
+					capabilities = python_capabilities,
 				},
 				ts_ls = {},
 				tailwindcss = {
@@ -127,15 +154,16 @@ return {
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				astro = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				json = { "prettierd" },
+				astro = { "prettier" },
+				javascriptreact = { "prettier" },
+				json = { "prettier" },
 				lua = { "stylua" },
-				typescript = { "prettierd" },
-				html = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				javascript = { "prettierd" },
-				yaml = { "prettierd" },
+				python = { "ruff_format" },
+				typescript = { "prettier" },
+				html = { "prettier" },
+				typescriptreact = { "prettier" },
+				javascript = { "prettier" },
+				yaml = { "prettier" },
 			},
 		},
 	},

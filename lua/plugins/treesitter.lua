@@ -1,41 +1,48 @@
+local parsers = {
+	"javascript",
+	"typescript",
+	"tsx",
+	"c",
+	"lua",
+	"vim",
+	"vimdoc",
+	"query",
+	"markdown",
+	"markdown_inline",
+}
+
+local function get_filetypes()
+	local filetypes = {}
+
+	for _, parser in ipairs(parsers) do
+		vim.list_extend(filetypes, vim.treesitter.language.get_filetypes(parser))
+	end
+
+	return vim.list.unique(filetypes)
+end
+
+local function has_indent_query(buffer)
+	local language = vim.treesitter.language.get_lang(vim.bo[buffer].filetype)
+
+	return language and vim.treesitter.query.get(language, "indents") ~= nil
+end
+
 return {
 	"nvim-treesitter/nvim-treesitter",
+	lazy = false,
 	build = ":TSUpdate",
 	config = function()
-		local config = require("nvim-treesitter.configs")
+		require("nvim-treesitter").install(parsers)
 
-		config.setup({
-			-- A list of parser names, or "all" (the five listed parsers should always be installed)
-			ensure_installed = {
-				"javascript",
-				"typescript",
-				"c",
-				"lua",
-				"vim",
-				"vimdoc",
-				"query",
-				"markdown",
-				"markdown_inline",
-			},
-
-			-- Install parsers synchronously (only applied to `ensure_installed`)
-			sync_install = false,
-
-			-- Automatically install missing parsers when entering buffer
-			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-			auto_install = true,
-
-			indent = { enable = true },
-
-			highlight = {
-				enable = true,
-
-				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-				-- Using this option may slow down your editor, and you may see some duplicate highlights.
-				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = false,
-			},
+		local group = vim.api.nvim_create_augroup("TreesitterConfig", { clear = true })
+		vim.api.nvim_create_autocmd("FileType", {
+			group = group,
+			pattern = get_filetypes(),
+			callback = function(args)
+				if pcall(vim.treesitter.start, args.buf) and has_indent_query(args.buf) then
+					vim.bo[args.buf].indentexpr = 'v:lua.require"nvim-treesitter".indentexpr()'
+				end
+			end,
 		})
 	end,
 }

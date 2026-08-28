@@ -51,7 +51,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 -- Add colored column indicating when line should break
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "140"
 
 -- Auto colorize files, this helps rendering the text with the color of the hex code
 vim.g.colorizer_auto_filetype = "css,html"
